@@ -1,20 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { StyleSheet, StatusBar, View, Dimensions } from "react-native";
+import { GluestackUIProvider } from "./components/ui/gluestack-ui-provider";
+import "@/global.css";
+import ProductList from "./app-components/alllProductsList";
+import { Heading } from "./components/ui/heading";
+import { SafeAreaView } from "react-native";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <GluestackUIProvider style={{ flex: 1 }}>
+        <Heading className=" pt-5 pb-5 text-center" size={"4xl"}>
+          Bad Products
+        </Heading>
+        <ProductList />
+      </GluestackUIProvider>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: "#fff",
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: "flex-start",
+    paddingHorizontal: 20,
+    paddingTop: StatusBar.currentHeight,
+    paddingBottom: 5,
+    height: Dimensions.get("window").height,
   },
 });
