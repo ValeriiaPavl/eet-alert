@@ -1,32 +1,25 @@
 import React from "react";
-import { StyleSheet, StatusBar, View, Dimensions } from "react-native";
-import { GluestackUIProvider } from "./components/ui/gluestack-ui-provider";
 import "@/global.css";
-import ProductList from "./app-components/alllProductsList";
-import { Heading } from "./components/ui/heading";
-import { SafeAreaView } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import BadProductsScreen from "./BadProductsScreen";
+import HelloWorldScreen from "./HelloWorldScreen";
+import { RootStackParamListType } from "./types/RootStackParamsList";
 
-export default function App() {
+const Stack = createNativeStackNavigator<RootStackParamListType>();
+export function RootStack() {
   return (
-    <SafeAreaView style={styles.container}>
-      <GluestackUIProvider style={{ flex: 1 }}>
-        <Heading className=" pt-5 pb-5 text-center" size={"4xl"}>
-          Bad Products
-        </Heading>
-        <ProductList />
-      </GluestackUIProvider>
-    </SafeAreaView>
+    <Stack.Navigator initialRouteName="BadProducts">
+      <Stack.Screen name="BadProducts" component={BadProductsScreen} />
+      <Stack.Screen name="HelloWorld" component={HelloWorldScreen} />
+    </Stack.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#fff",
-    flex: 1,
-    justifyContent: "flex-start",
-    paddingHorizontal: 20,
-    paddingTop: StatusBar.currentHeight,
-    paddingBottom: 5,
-    height: Dimensions.get("window").height,
-  },
-});
+export default function App() {
+  return (
+    <NavigationContainer>
+      <RootStack />
+    </NavigationContainer>
+  );
+}
